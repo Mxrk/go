@@ -7,22 +7,25 @@
     .center {
     margin: auto;
     width: 60%;
-    border: 3px solid #73AD21;
+    border: 3px solid rgb(19, 128, 179);
     padding: 10px;
     }
     </style>
 </head>
 <body>
-    <p class="center">
-        {{(index . ).Story}}
-    </p>
-
-    <p> Options: </p>
+    <div class="center">
+            {{ range  $value := .Story}}
+            <p>{{$value }}</p>
+            {{end}}
+    </div>
     <p>
-
         {{ range  $value := .Options}}
-        <li>{{ $value.Text  }}</li>
-        <a href="/{{ $value.Arc  }}"> <button>{{ $value.Arc  }}</button></a>
+
+        <div class="center">
+            <a href="/{{ $value.Arc  }}"> {{ $value.Text  }}</a>
+
+        </div>
+        <p></p>
         {{ end }}
     </p>
 </body>
