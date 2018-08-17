@@ -47,7 +47,7 @@ func main() {
 
 			}
 		}
-		if n.Type == 1 {
+		if n.Type == 1 && len(n.Parent.Attr) > 0 {
 			check := strings.TrimSpace(n.Data) == ""
 			if !check {
 				// fmt.Println(n.Type)
