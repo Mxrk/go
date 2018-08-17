@@ -20,9 +20,20 @@ func main() {
 	// }
 
 	s := `<html>
+	<head>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
 	<body>
-	  <h1>Hello!</h1>
-	  <a href="/other-page">A link to another page</a>
+	  <h1>Social stuffs</h1>
+	  <div>
+		<a href="https://www.twitter.com/joncalhoun">
+		  Check me out on twitter
+		  <i class="fa fa-twitter" aria-hidden="true"></i>
+		</a>
+		<a href="https://github.com/gophercises">
+		  Gophercises is on <strong>Github</strong>!
+		</a>
+	  </div>
 	</body>
 	</html>`
 
@@ -35,14 +46,17 @@ func main() {
 	f = func(n *html.Node) {
 
 		if n.Type == html.ElementNode && n.Data == "a" {
+			//	fmt.Println(n.Attr)
 			for _, a := range n.Attr {
 				if a.Key == "href" {
-					if !strings.HasPrefix(a.Val, "/") {
+					//fmt.Println(a.Val)
+					//	fmt.Printf("Href: %s", a.Val)
+					if strings.HasPrefix(a.Val, "/") || strings.HasPrefix(a.Val, "https://") {
+						fmt.Printf("Href: %s", a.Val)
+						fmt.Println()
+					} else {
 						break
 					}
-					fmt.Printf("Href: %s", a.Val)
-					fmt.Println()
-					break
 				}
 
 			}
@@ -53,8 +67,8 @@ func main() {
 				// fmt.Println(n.Type)
 				// fmt.Println(html.TextNode)
 				// fmt.Println(html.ElementNode)
-
-				fmt.Printf("Text: %s", n.Data)
+				t := strings.TrimSpace(n.Data)
+				fmt.Printf("Text: %s", t)
 				fmt.Println()
 			}
 
