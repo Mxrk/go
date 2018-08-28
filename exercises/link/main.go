@@ -14,11 +14,6 @@ type Link struct {
 
 func main() {
 
-	// r, err := os.Open("ex1.html")
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-
 	s := `<html>
 	<head>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,16 +56,14 @@ func main() {
 
 			}
 		}
-		if n.Type == 1 && len(n.Parent.Attr) > 0 {
-			check := strings.TrimSpace(n.Data) == ""
-			if !check {
-				// fmt.Println(n.Type)
-				// fmt.Println(html.TextNode)
-				// fmt.Println(html.ElementNode)
-				t := strings.TrimSpace(n.Data)
-				fmt.Printf("Text: %s", t)
-				fmt.Println()
-			}
+		t := strings.TrimSpace(n.Data)
+
+		if n.Type == html.TextNode && len(t) > 0 {
+			fmt.Println("Text: ", t)
+			fmt.Printf("Type: %v, ElementNode: %v,", n.Type, html.ElementNode)
+			fmt.Println()
+		}
+		if n.Type != html.ElementNode {
 
 		}
 
