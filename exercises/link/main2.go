@@ -45,9 +45,10 @@ func main() {
 		ret.Href = (link(n))
 
 		ret.Text = (text(n))
-
-		fmt.Println(ret.Href)
-		fmt.Println(ret.Text)
+		if ret.Href != "" && n.Data == "a" {
+			fmt.Printf("Link: %q\n", ret.Href)
+			fmt.Printf("Text: %q\n", ret.Text)
+		}
 
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
@@ -73,10 +74,11 @@ func text(n *html.Node) string {
 }
 
 func link(n *html.Node) string {
+	var ret string
 	for _, attr := range n.Attr {
 		if attr.Key == "href" {
-			return attr.Val
+			ret = attr.Val
 		}
 	}
-	return ""
+	return ret
 }
